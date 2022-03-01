@@ -21,8 +21,12 @@ void setup ()
     setMines();
 }
 public void setMines()
-{
-    //your code
+{  
+  int row = (int)Math.random()*4;
+  int col = (int)Math.random()*4;
+  if(!mines.contains(buttons[row][col]))//error null
+      mines.add(buttons[row][col]);
+  
 }
 
 public void draw ()
@@ -85,8 +89,8 @@ public class MSButton
     {    
         if (flagged)
             fill(0);
-        // else if( clicked && mines.contains(this) ) 
-        //     fill(255,0,0);
+         else if( clicked && mines.contains(this) ) 
+             fill(255,0,0);
         else if(clicked)
             fill( 200 );
         else 
