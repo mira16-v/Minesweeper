@@ -1,3 +1,4 @@
+//left off at step 12
 import de.bezier.guido.*;
 private static final int NUM_COLS = 5;
 private static final int NUM_ROWS = 5;
@@ -53,13 +54,19 @@ public void displayWinningMessage()
 }
 public boolean isValid(int r, int c)
 {
-    //your code here
-    return false;
+    if(r >= 0 && r < NUM_ROWS && c >= 0 && c < NUM_COLS){
+      return true;
+    } return false;
 }
-public int countMines(int row, int col)
+public int countMines(int row, int col) //step 12
 {
     int numMines = 0;
-    //your code here
+    for(int r = row-1;r<=row+1;r++)
+      for(int c = col-1; c<=col+1;c++)
+      if(isValid(r,c) && buttons[r][c] == mines)
+        numMines++;
+    if(buttons[row][col]==5)
+      numMines--;
     return numMines;
 }
 public class MSButton
