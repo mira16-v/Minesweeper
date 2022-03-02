@@ -22,8 +22,11 @@ void setup ()
 }
 public void setMines()
 {  
-  int row = (int)Math.random()*4;
-  int col = (int)Math.random()*4;
+  int row = (int)(Math.random()*4);
+  int col = (int)(Math.random()*4);
+  System.out.println(row);
+  System.out.println(col);
+  System.out.println(mines.size()); // did i even initialize mines..........
   if(!mines.contains(buttons[row][col]))//error null
       mines.add(buttons[row][col]);
   
