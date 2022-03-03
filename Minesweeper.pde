@@ -1,4 +1,4 @@
-//left off at step 12
+//left off at step 13
 import de.bezier.guido.*;
 private static final int NUM_COLS = 5;
 private static final int NUM_ROWS = 5;
@@ -23,8 +23,8 @@ void setup ()
 }
 public void setMines()
 {  
-  int row = (int)(Math.random()*4);
-  int col = (int)(Math.random()*4);
+  int row = (int)(Math.random()*NUM_ROWS);
+  int col = (int)(Math.random()*NUM_COLS);
   System.out.println(row);
   System.out.println(col);
   System.out.println(mines.size());
@@ -61,13 +61,16 @@ public boolean isValid(int r, int c)
 public int countMines(int row, int col) //step 12
 {
     int numMines = 0;
-    for(int r = row-1;r<=row+1;r++)
-      for(int c = col-1; c<=col+1;c++)
-      if(isValid(r,c) && buttons[r][c] == mines)
-        numMines++;
-    if(buttons[row][col]==5)
-      numMines--;
-    return numMines;
+    for(int r = row-1;r<=row+1;r++){
+      for(int c = col-1; c<=col+1;c++){
+        if(isValid(r,c) && mines.contains(buttons[r][c])){
+          numMines++;
+        }
+        if(mines.contains(buttons[r][c])){
+          numMines--;
+        }
+      }
+    } return numMines;
 }
 public class MSButton
 {
@@ -93,7 +96,18 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
-        //your code here
+        if(mouseButton == RIGHT && flagged == false){
+          flagged = true;
+        } else if(mouseButton == RIGHT && flagged == true){
+          flagged = false;
+        } else if(mines.contains(this)){
+          displayWinningMessage();
+        } else if(countMines(myRow, myCol) > 0){
+          myLabel =myLabel + countMines(myRow, myCol);
+        } else {
+          if(isValid(myRow-1, myCol-1) && clicked == false)
+            buttons[myRow-1][myCol-1].mousePressed();
+        }
     }
     public void draw () 
     {    
