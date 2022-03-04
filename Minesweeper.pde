@@ -1,4 +1,4 @@
-//left off at step 13
+//left off at step 14
 import de.bezier.guido.*;
 private static final int NUM_COLS = 5;
 private static final int NUM_ROWS = 5;
@@ -23,13 +23,14 @@ void setup ()
 }
 public void setMines()
 {  
-  int row = (int)(Math.random()*NUM_ROWS);
-  int col = (int)(Math.random()*NUM_COLS);
-  System.out.println(row);
-  System.out.println(col);
-  System.out.println(mines.size());
-  if(!mines.contains(buttons[row][col]))//error null
+  int row = 0;
+  int col = 0;
+  for(int i = 0; i < 5; i++){
+    row = (int)(Math.random()*NUM_ROWS);
+    col = (int)(Math.random()*NUM_COLS);
+     if(!mines.contains(buttons[row][col]))
       mines.add(buttons[row][col]);
+  }
   
 }
 
@@ -107,6 +108,27 @@ public class MSButton
         } else {
           if(isValid(myRow-1, myCol-1) && clicked == false)
             buttons[myRow-1][myCol-1].mousePressed();
+          
+          if(isValid(myRow-1, myCol) && clicked == false)
+            buttons[myRow-1][myCol].mousePressed();
+          
+          if(isValid(myRow-1, myCol+1) && clicked == false)
+            buttons[myRow-1][myCol+1].mousePressed();
+          
+          if(isValid(myRow, myCol-1) && clicked == false)
+            buttons[myRow][myCol-1].mousePressed();
+          
+          if(isValid(myRow, myCol+1) && clicked == false)
+            buttons[myRow][myCol+1].mousePressed();
+          
+          if(isValid(myRow+1, myCol-1) && clicked == false)
+            buttons[myRow+1][myCol-1].mousePressed();
+          
+          if(isValid(myRow+1, myCol) && clicked == false)
+            buttons[myRow+1][myCol].mousePressed();
+          
+          if(isValid(myRow+1, myCol+1) && clicked == false)
+            buttons[myRow+1][myCol+1].mousePressed();
         }
     }
     public void draw () 
