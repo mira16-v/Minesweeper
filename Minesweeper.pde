@@ -19,8 +19,8 @@ void setup ()
       for(int c = 0; c < NUM_COLS; c++)
         buttons[r][c] = new MSButton(r, c);
     
-    
-   setMines();
+    for(int i = 0; i < NUM_ROWS*NUM_COLS/10; i++)
+      setMines();
 }
 public void setMines()
 {  
@@ -108,9 +108,6 @@ public int countMines(int row, int col) //step 12
         if(isValid(r,c) && mines.contains(buttons[r][c])){
           numMines++;
         }
-        if(mines.contains(buttons[r][c])){
-          numMines--;
-        }
       }
     } return numMines;
 }
@@ -137,14 +134,11 @@ public class MSButton
     // called by manager
     public void mousePressed () 
     {
-        if(mouseButton == RIGHT){
+      clicked = true;  
+      if(mouseButton == RIGHT){
           flagged = !flagged;
-          if(flagged){
-             if(!clicked){
-               clicked = false;
-             } else if (clicked == true){
-               clicked = true;
-             }
+          if(flagged == false){
+             clicked = false;
           }
         }
         else if(mines.contains(this)){
@@ -158,7 +152,7 @@ public class MSButton
           clicked = true;
           for(int r = myRow-1;r<=myRow+1;r++){
             for(int c = myCol-1; c<=myCol+1;c++){
-              if(isValid(r, r) && clicked == false){
+              if(isValid(r, c) && buttons[r][c].clicked == false){
                 buttons[r][c].mousePressed();
               }
             }
